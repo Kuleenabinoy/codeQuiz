@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>codeQuiz</title>
+        <link rel="stylesheet" href="./assets/style.css" />
+    </head>
+    <body>
+        <header>
+            <!--header section with Highscorelink ,start button and timer-->
+            <nav class="highscore">
+                <a id="highscore-link" href="#">High Score</a>
+                <button id="start">Start Playing</button>
+                <span id="timer">0</span>
+            </nav>
+        </header>
+        <main>
+            <!--quiz question and options-->
+            <div class="quizcontainer">
+                <div class="questioncontainer" id="questions"></div>
+                <div class="buttoncontainer" id="buttons">
+                    <button class="options" id="option1"></button>
+                    <button class="options" id="option2"></button>
+                    <button class="options" id="option3"></button>
+                    <button class="options" id="option4"></button>
+                </div>
+            </div>
+        </main>
+        <aside id="formcontainer">
+            <!--enter name for local area storage and score display-->
+            <div id="form1">
+                <form class="form">
+                    <h1>Game Over!!!!!!!</h1>
+                    <h2>Your Score:<span id="score1">0</span></h2>
+
+                    <h2>Enter Your Name:</h2>
+                    <input type="text" id="name" />
+                    <button id="submit">Submit</button>
+                    <button class="replay" id="replay1">Play Again</button>
+                </form>
+            </div>
+        </aside>
+        <aside id="highscorecontainer">
+            <!--high score display-->
+            <div id="highscore">
+                <h2>Last Player Details</h2>
+                <p>User Name:<span id="savedname"></span></p>
+                <p>Score Got:<span id="savedscore"></span></p>
+                <button class="replay" id="replay2">Play Again</button>
+            </div>
+        </aside>
+        <script src="./assets/script.js"></script>
+    </body>
+</html>
