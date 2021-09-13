@@ -40,14 +40,9 @@ var currentQuestion = 0;
 //questionobj object holding questions options and answer
 var questionObj = [
     {
-        question: "What is the full form of HTML?",
-        option: [
-            "Hyper Text MarkUp Language",
-            "Hyper Text Marking Location",
-            "Hyper To Marking Lots",
-            "Higher Ten Markup Language",
-        ],
-        answer: "Hyper Text MarkUp Language",
+        question: "Which one of these is used to convert an object to Json string ?",
+        option: [".stringify", ".concat", ".parse", "non of the above"],
+        answer: ".stringify",
     },
 
     {
@@ -68,11 +63,15 @@ var questionObj = [
         option: ["boolean", "string", "number", "all of these"],
         answer: "all of these",
     },
-
     {
-        question: "Which one of these is used to convert an object to Json string ?",
-        option: [".stringify", ".concat", ".parse", "non of the above"],
-        answer: ".stringify",
+        question: "What is the full form of HTML?",
+        option: [
+            "Hyper Text MarkUp Language",
+            "Hyper Text Marking Location",
+            "Hyper To Marking Lots",
+            "Higher Ten Markup Language",
+        ],
+        answer: "Hyper Text MarkUp Language",
     },
 ];
 // console.log(questionObj[0]);
@@ -85,11 +84,12 @@ var questionObj = [
 
 //startFunction starting quiz ;timer starts at 50 secs;Total quiz time 50secs
 function startFunc() {
+    // currentQuestion = 0;
     quiz.style.display = "block";
     formShow.style.display = "none";
     scoreshow.style.display = "none";
     // highscore.disabled = "true";
-    timeLeft = 50;
+    timeLeft = 60;
     //startBtn.disabled = true;
     timerBtn.textContent = timeLeft;
     timer = setInterval(function () {
@@ -100,7 +100,7 @@ function startFunc() {
             endGame();
         }
     }, 1000);
-    next();
+    nextQuestion();
 }
 //end function display score and display form to enter name for storage
 function endGame() {
@@ -108,9 +108,11 @@ function endGame() {
     formShow.style.display = "block";
     quiz.style.display = "none";
     score1.textContent = score;
+    // playagain.style.display = "none";
+    //startBtn.disabled = "true";
 }
-//function next to load questions to option buttons
-function next() {
+//function nextQuestion  to load questions and options  option buttons
+function nextQuestion() {
     question.textContent = questionObj[currentQuestion].question;
     op1.textContent = questionObj[currentQuestion].option[0];
     op2.textContent = questionObj[currentQuestion].option[1];
@@ -119,27 +121,12 @@ function next() {
     //currentQuestion=currentQuestion+1;
     // console.log(currentQuestion);
 }
-//function to check answer selected is correct or not
-function checkAnswer(answer) {
-    if (questionObj[currentQuestion].answer === questionObj[currentQuestion].option[answer]) {
-        // console.log(questionObj[currentQuestion].answer);
-        // console.log(questionObj[currentQuestion].option[answer]);
-        score = score + 1;
-        // console.log(score,"score");
-    }
-    currentQuestion++;
-    if (currentQuestion < questionObj.length) {
-        next();
-    } else {
-        endGame();
-        return;
-    }
-}
 
 function optionA() {
-    checkAnswer(0);
+    checkAnswer(0); //passes 0 as argument to check answer if first opttion s correct
 }
 function optionB() {
+    //passs 1 if second option correct
     checkAnswer(1);
 }
 function optionC() {
@@ -148,9 +135,30 @@ function optionC() {
 function optionD() {
     checkAnswer(3);
 }
+//function to check answer selected is correct or not
+function checkAnswer(answer) {
+    if (questionObj[currentQuestion].answer === questionObj[currentQuestion].option[answer]) {
+        // console.log(questionObj[currentQuestion].answer);
+        // console.log(questionObj[currentQuestion].option[answer]);
+        score = score + 1;
+        // console.log(score,"score");
+    } else {
+        timeLeft = timeLeft - 5; //5 seconds reduced for wrong answer selection
+        timerBtn.textContent = timeLeft;
+    }
+    currentQuestion++;
+    if (currentQuestion < questionObj.length) {
+        nextQuestion();
+    } else {
+        endGame();
+        return;
+    }
+}
+
 //var playerList = document.querySelector("#playerlist");
 
 //localarea  storage section
+var userList;
 //function to store player details to loacl arae storage
 function scoreStore(event) {
     //startBtn.style.display="";
@@ -163,10 +171,11 @@ function scoreStore(event) {
             scoreGot: score1.textContent,
         },
     ];
-    users.push();
+    userList = users.push();
     localStorage.setItem("users", JSON.stringify(users));
-
+    localStorage.setItem("userList", JSON.stringify(userList));
     console.log(users);
+    console.log(userList);
     //playagain.addEventListener("click", startFunc);
 }
 
@@ -175,12 +184,13 @@ function getScore() {
     formShow.style.display = "none";
     scoreshow.style.display = "block";
     quiz.style.display = "none";
-
+    // startBtn.disabled = "true";
+    // playagain.style.display = "none";
     var lastplayer = JSON.parse(localStorage.getItem("users"));
     document.getElementById("savedname").textContent = lastplayer[0].playername;
     document.getElementById("savedscore").textContent = lastplayer[0].scoreGot;
-    //   playagain.addEventListener("click", startFunc);
 }
+
 //play again function
 function restart() {
     //startBtn.disabled = "false";
