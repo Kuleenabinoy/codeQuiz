@@ -31,24 +31,22 @@
         <aside id="formcontainer">
             <!--enter name for local area storage and score display-->
             <div id="form1">
-                <form class="form">
-                    <h1>Game Over!!!!!!!</h1>
-                    <h2>Your Score:<span id="score1">0</span></h2>
-
-                    <h2>Enter Your Name:</h2>
-                    <input type="text" id="name" />
-                    <button id="submit">Submit</button>
-                    <button class="replay" id="replay1">Play Again</button>
-                </form>
+                <h3>Game Over!!!!!!!</h3>
+                <h3>Your Score:<span id="score1">0</span></h3>
+                <label>Enter Your Name:</label>
+                <input type="text" id="name" />
+                <button id="submit">Submit</button>
+                <button class="replay" id="replay1">Play Again</button>
+                <button class="replay" id="clear">Clear Storage</button>
             </div>
         </aside>
         <aside id="highscorecontainer">
             <!--high score display-->
             <div id="highscore">
-                <h2>Last Player Details</h2>
-                <p>User Name:<span id="savedname"></span></p>
-                <p>Score Got:<span id="savedscore"></span></p>
                 <button class="replay" id="replay2">Play Again</button>
+                <h3>PLAYER LISTS WITH SCORES...</h3>
+                <ul id="list"></ul>
+                <ul id="list2"></ul>
             </div>
         </aside>
         <script src="./assets/script.js"></script>

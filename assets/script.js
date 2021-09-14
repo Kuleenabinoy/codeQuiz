@@ -11,13 +11,14 @@ var formShow = document.querySelector("#formcontainer");
 var submitBtn = document.querySelector("#submit");
 var quiz = document.querySelector(".quizcontainer");
 var score1 = document.querySelector("#score1");
-var submitBtn = document.querySelector("#submit");
 var username = document.querySelector("#name");
 var scoreshow = document.querySelector("#highscorecontainer");
 var playagain1 = document.querySelector("#replay1");
 var playagain2 = document.querySelector("#replay2");
 var playagain = document.querySelector(".highscore");
-
+var list = document.querySelector("#list");
+var list2 = document.querySelector("#list2");
+var clearBtn = document.querySelector("#clear");
 //adding event listeners
 playagain1.addEventListener("click", restart);
 playagain2.addEventListener("click", restart);
@@ -28,6 +29,7 @@ op2.addEventListener("click", optionB);
 op3.addEventListener("click", optionC);
 op4.addEventListener("click", optionD);
 submitBtn.addEventListener("click", scoreStore);
+clearBtn.addEventListener("click", clearFunc);
 quiz.style.display = "none";
 formShow.style.display = "none";
 scoreshow.style.display = "none";
@@ -82,15 +84,13 @@ var questionObj = [
 // console.log(questionObj[0].option[2]);
 // console.log(questionObj[0].option[3]);
 
-//startFunction starting quiz ;timer starts at 50 secs;Total quiz time 50secs
+//startFunction starting quiz ;timer starts at 75 secs;Total quiz time 50secs
 function startFunc() {
-    // currentQuestion = 0;
+    currentQuestion = 0;
     quiz.style.display = "block";
     formShow.style.display = "none";
     scoreshow.style.display = "none";
-    // highscore.disabled = "true";
-    timeLeft = 60;
-    //startBtn.disabled = true;
+    timeLeft = 75;
     timerBtn.textContent = timeLeft;
     timer = setInterval(function () {
         timeLeft--;
@@ -106,10 +106,9 @@ function startFunc() {
 function endGame() {
     timerBtn.style.display = "none";
     formShow.style.display = "block";
+
     quiz.style.display = "none";
     score1.textContent = score;
-    // playagain.style.display = "none";
-    //startBtn.disabled = "true";
 }
 //function nextQuestion  to load questions and options  option buttons
 function nextQuestion() {
@@ -118,8 +117,6 @@ function nextQuestion() {
     op2.textContent = questionObj[currentQuestion].option[1];
     op3.textContent = questionObj[currentQuestion].option[2];
     op4.textContent = questionObj[currentQuestion].option[3];
-    //currentQuestion=currentQuestion+1;
-    // console.log(currentQuestion);
 }
 
 function optionA() {
@@ -155,40 +152,57 @@ function checkAnswer(answer) {
     }
 }
 
-//var playerList = document.querySelector("#playerlist");
-
 //localarea  storage section
-var userList;
-//function to store player details to loacl arae storage
-function scoreStore(event) {
-    //startBtn.style.display="";
-    event.preventDefault();
-    // user=username.textContent
-    //var highscore=score1.textContent;
-    var users = [
-        {
-            playername: username.value,
-            scoreGot: score1.textContent,
-        },
-    ];
-    userList = users.push();
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("userList", JSON.stringify(userList));
-    console.log(users);
-    console.log(userList);
-    //playagain.addEventListener("click", startFunc);
-}
 
-//function to get information from local storage area.
-function getScore() {
+//function to store player details to local area storage
+function scoreStore(event) {
+    username.textContent = " ";
+    event.preventDefault();
+
+    var highScores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+    console.log(highScores, "highscores");
+    var users = {
+        playername: username.value,
+        scoreGot: score1.textContent,
+    };
+    highScores.push(users);
+    localStorage.setItem("highscores", JSON.stringify(highScores));
+    alert("YOUR SCORE GOT UPDATED IN LOCAL STORAGE"); //alert when stroarge is updated
     formShow.style.display = "none";
     scoreshow.style.display = "block";
     quiz.style.display = "none";
+    //  list2.style.display = "none";
     // startBtn.disabled = "true";
     // playagain.style.display = "none";
-    var lastplayer = JSON.parse(localStorage.getItem("users"));
-    document.getElementById("savedname").textContent = lastplayer[0].playername;
-    document.getElementById("savedscore").textContent = lastplayer[0].scoreGot;
+    var playerList = JSON.parse(window.localStorage.getItem("highscores"));
+    console.log(playerList);
+    for (var i = 0; i < playerList.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = playerList[i].playername + " : " + playerList[i].scoreGot;
+        list.append(li);
+    }
+}
+
+//function to get information from local storage area.
+//alert is given when storage is empty
+function getScore() {
+    list.style.display = "none";
+    formShow.style.display = "none";
+    scoreshow.style.display = "block";
+    quiz.style.display = "none";
+    var sortedScore = localStorage.getItem("highscores");
+    console.log(sortedScore, " highscores");
+    var sortedHighscore = JSON.parse(sortedScore);
+    console.log(sortedHighscore);
+    if (sortedHighscore === null) {
+        alert("YOUR STORAGE IS EMPTY !!!!");
+    } else {
+        for (var i = 0; i < sortedHighscore.length; i++) {
+            var li = document.createElement("li");
+            li.textContent = sortedHighscore[i].playername + " : " + sortedHighscore[i].scoreGot;
+            list2.append(li);
+        }
+    }
 }
 
 //play again function
@@ -198,4 +212,9 @@ function restart() {
     quiz.style.display = "none";
     scoreshow.style.display = "none";
     formShow.style.display = "none";
+}
+// function to clear local storage
+function clearFunc() {
+    window.localStorage.clear();
+    alert("Your Local storage is empty");
 }

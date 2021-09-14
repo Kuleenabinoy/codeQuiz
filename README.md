@@ -1,11 +1,14 @@
 # codeQuiz
 
-code quiz starts when user click start button.
-quiz runs for 50 seconds and end game
-score is added when user click correct button.
+Code quiz starts when user click start button questions will load automatically and user need to click the correct button with answer.
+Quiz runs for 75 seconds and end game
+Score is added when user click correct button.
 5 seconds is reduced when user opts a wrong choice.
-displays score and provision for enter player name to store in local area storage.
-retrives information from local area storage.
+Displays score and provision for enter player name to store in local area storage.
+Displays the local storage when with new player name when user clicks the submit button.
+Clear local storage will clear the contents of local storage.
+High score retrives information from local area storage.
+Will give an alert if local storage is empty
 
 Deployed website link :https://kuleenabinoy.github.io/codeQuiz/
 
