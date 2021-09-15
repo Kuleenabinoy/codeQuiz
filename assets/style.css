@@ -102,9 +102,7 @@ label{
     font-size: 20px;
     font-weight: bold;
 }
-#score,#name{
-    
-}
+
 #name{
     border:2px solid black;
     height:30px;
@@ -125,7 +123,7 @@ box-shadow: 2px 5px 2px crimson;
     box-shadow: 2px 5px 2px crimson;
     padding: 5px;
 }
-#replay1 ,#submit,#replay2,#clear{
+#replay1 ,#submit,#replay2,#clear,#clearLocal{
     
     cursor: pointer;
     box-shadow: 2px 5px 2px crimson;
@@ -135,16 +133,27 @@ li
 {
     font-size: 20px;
     font-family: bold;
-    
+    margin-top: 10px;
     
 }
 h3{
     padding-left: 10px;
 
 }
-#replay2
+#replay2,#clearLocal
 {
     margin-top:30px ;
     margin-left: 30px;
+
+}
+#clearLocal
+{
+    margin-left:10px;
+}
+#list,#list2{
+    font-size: 20px;
+    margin-top :20px;
+    margin-bottom: 30px;
+    font-weight: bold;
 
 }
