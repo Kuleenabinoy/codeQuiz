@@ -13,3 +13,4 @@ Will give an alert if local storage is empty.
 Deployed website link :https://kuleenabinoy.github.io/codeQuiz/
 
 github page:https://github.com/Kuleenabinoy/codeQuiz
+![Screenshot 2021-09-14 23 29 48](https://user-images.githubusercontent.com/86656634/136651858-95232c4b-b346-4473-91ee-b93072fc9097.png)
